@@ -81,7 +81,10 @@ public class FsSystem {
         sb.append(String.format("%02X", oneByte));
       }
       return sb.toString();
-    } catch(NoSuchAlgorithmException error) {
+    } catch(NoSuchAlgorithmException e) {
+      e.printStackTrace();
+    } catch(NullPointerException e) {
+      e.printStackTrace();
     }
     return null;
   }
