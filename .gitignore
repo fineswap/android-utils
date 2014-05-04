@@ -1,0 +1,8 @@
+bin/
+gen/
+nbandroid/
+private/
+library/javadoc/
+library/libs/
+library/res/
+proguard-project.txt
