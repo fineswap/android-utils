@@ -43,19 +43,19 @@ public class FsMetaVersion<T> extends FsVersion {
    *
    * @since 1.0
    */
-  public final T meta;
+  public final T data;
 
   /**
    * Instantiates a new meta-data-backed versioning object with the specified
    * class id, meta-data and major; uses default settings for minor and patch.
    *
    * @param classId {@link #classId}
-   * @param meta {@link #meta}
+   * @param data {@link #data}
    * @param major {@link #major}
    */
-  public FsMetaVersion(String classId, T meta, int major) {
+  public FsMetaVersion(String classId, T data, int major) {
     super(classId, major);
-    this.meta = meta;
+    this.data = data;
   }
 
   /**
@@ -63,13 +63,13 @@ public class FsMetaVersion<T> extends FsVersion {
    * class id, meta-data, major and minor; uses default value for patch.
    *
    * @param classId {@link #classId}
-   * @param meta {@link #meta}
+   * @param data {@link #data}
    * @param major {@link #major}
    * @param minor {@link #minor}
    */
-  public FsMetaVersion(String classId, T meta, int major, int minor) {
+  public FsMetaVersion(String classId, T data, int major, int minor) {
     super(classId, major, minor);
-    this.meta = meta;
+    this.data = data;
   }
 
   /**
@@ -77,14 +77,14 @@ public class FsMetaVersion<T> extends FsVersion {
    * class id, meta-data and major, minor and patch level.
    *
    * @param classId {@link #classId}
-   * @param meta {@link #meta}
+   * @param data {@link #data}
    * @param major {@link #major}
    * @param minor {@link #minor}
    * @param patch {@link #patch}
    */
-  public FsMetaVersion(String classId, T meta, int major, int minor, int patch) {
+  public FsMetaVersion(String classId, T data, int major, int minor, int patch) {
     super(classId, major, minor, patch);
-    this.meta = meta;
+    this.data = data;
   }
 
   /**
@@ -97,8 +97,8 @@ public class FsMetaVersion<T> extends FsVersion {
       super.equals(o) &&
       o instanceof FsMetaVersion &&
       (
-        (null == meta && null == ((FsMetaVersion)o).meta) ||
-        meta.equals(((FsMetaVersion)o).meta)
+        (null == data && null == ((FsMetaVersion)o).data) ||
+        data.equals(((FsMetaVersion)o).data)
       );
   }
 
@@ -108,7 +108,7 @@ public class FsMetaVersion<T> extends FsVersion {
    */
   @Override
   public int hashCode() {
-    return toString().hashCode() + (null == meta ? 0 : meta.hashCode());
+    return toString().hashCode() + (null == data ? 0 : data.hashCode());
   }
 
 }
