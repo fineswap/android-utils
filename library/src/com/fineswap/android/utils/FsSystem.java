@@ -92,6 +92,7 @@ public class FsSystem {
    *
    * @param ctx App context
    * @return Cache directory for the specified context, or null on error
+   * @since 1.0
    */
   public static File getCacheDir(Context ctx) {
     File cacheDir = ctx.getCacheDir();
@@ -115,6 +116,7 @@ public class FsSystem {
    * @param resource Resource version to create a corresponding directory for
    * @param inDataDirIfNeeded If the directory cannot be created in cache directory, create it in the data directory
    * @return Cache directory for the specified resource, or null on error
+   * @since 1.0
    */
   public static File getCacheDir(Context ctx, FsVersion resource, boolean inDataDirIfNeeded) {
     File cacheDir = getCacheDir(ctx);
