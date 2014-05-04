@@ -1,7 +1,7 @@
 [Fineswap][Fineswap] Android Utilities
 ==========================
 
-A collection of reusable interfaces, classes and UI components and utilities for the Android OS.
+A collection of reusable interfaces, classes and UI components and utilities for Android.
 
 
 Terms of Use
