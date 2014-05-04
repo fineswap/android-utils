@@ -109,6 +109,22 @@ public class FsSystem {
   /**
    * Get a cache directory corresponding to the specified resource version.
    * The directory is created inside context's cache directory and its name is
+   * based on the resource's name and version. If the directory cannot be
+   * created in the cache directory, it will be created in the data directory.
+   *
+   * @see FsVersion
+   * @param ctx App context
+   * @param resource Resource version to create a corresponding directory for
+   * @return Cache directory for the specified resource, or null on error
+   * @since 1.0
+   */
+  public static File getCacheDir(Context ctx, FsVersion resource) {
+    return getCacheDir(ctx, resource, true);
+  }
+
+  /**
+   * Get a cache directory corresponding to the specified resource version.
+   * The directory is created inside context's cache directory and its name is
    * based on the resource's name and version.
    *
    * @see FsVersion
