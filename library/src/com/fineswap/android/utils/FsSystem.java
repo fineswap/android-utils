@@ -27,6 +27,8 @@
 
 package com.fineswap.android.utils;
 
+import android.content.Context;
+import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -82,6 +84,49 @@ public class FsSystem {
     } catch(NoSuchAlgorithmException error) {
     }
     return null;
+  }
+
+  /**
+   * Get the cache directory for the specified context.
+   * The directory will be created when necessary.
+   *
+   * @param ctx App context
+   * @return Cache directory for the specified context, or null on error
+   */
+  public static File getCacheDir(Context ctx) {
+    File cacheDir = ctx.getCacheDir();
+    if(null != cacheDir) {
+      if(cacheDir.isFile()) {
+        cacheDir.delete();
+      } else if(!cacheDir.exists()) {
+        cacheDir.mkdirs();
+      }
+    }
+    return cacheDir;
+  }
+
+  /**
+   * Get a cache directory corresponding to the specified resource version.
+   * The directory is created inside context's cache directory and its name is
+   * based on the resource's name and version.
+   *
+   * @see FsVersion
+   * @param ctx App context
+   * @param resource Resource version to create a corresponding directory for
+   * @param inDataDirIfNeeded If the directory cannot be created in cache directory, create it in the data directory
+   * @return Cache directory for the specified resource, or null on error
+   */
+  public static File getCacheDir(Context ctx, FsVersion resource, boolean inDataDirIfNeeded) {
+    File cacheDir = getCacheDir(ctx);
+    if(null != cacheDir) {
+      String dirName = resource.toString();
+      cacheDir = new File(cacheDir, dirName);
+      cacheDir.mkdirs();
+      if(!cacheDir.exists() && inDataDirIfNeeded) {
+        cacheDir = ctx.getDir(dirName, Context.MODE_PRIVATE);
+      }
+    }
+    return cacheDir;
   }
 
 }
