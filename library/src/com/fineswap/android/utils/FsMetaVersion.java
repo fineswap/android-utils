@@ -33,16 +33,17 @@ package com.fineswap.android.utils;
  *
  * @see FsVersion
  * @author Noor Dawod
+ * @param <T> Type of meta-data in this versioning object
  * @since 1.0
  */
-public class FsMetaVersion extends FsVersion {
+public class FsMetaVersion<T> extends FsVersion {
 
   /**
    * Meta-data object to attach to this versioning object.
    *
    * @since 1.0
    */
-  public final Object meta;
+  public final T meta;
 
   /**
    * Instantiates a new meta-data-backed versioning object with the specified
@@ -52,7 +53,7 @@ public class FsMetaVersion extends FsVersion {
    * @param meta {@link #meta}
    * @param major {@link #major}
    */
-  public FsMetaVersion(String classId, Object meta, int major) {
+  public FsMetaVersion(String classId, T meta, int major) {
     super(classId, major);
     this.meta = meta;
   }
@@ -66,7 +67,7 @@ public class FsMetaVersion extends FsVersion {
    * @param major {@link #major}
    * @param minor {@link #minor}
    */
-  public FsMetaVersion(String classId, Object meta, int major, int minor) {
+  public FsMetaVersion(String classId, T meta, int major, int minor) {
     super(classId, major, minor);
     this.meta = meta;
   }
@@ -81,7 +82,7 @@ public class FsMetaVersion extends FsVersion {
    * @param minor {@link #minor}
    * @param patch {@link #patch}
    */
-  public FsMetaVersion(String classId, Object meta, int major, int minor, int patch) {
+  public FsMetaVersion(String classId, T meta, int major, int minor, int patch) {
     super(classId, major, minor, patch);
     this.meta = meta;
   }
