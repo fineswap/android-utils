@@ -55,7 +55,8 @@ public class FsView {
    */
   @SuppressWarnings("deprecation")
   public static void setBackgroundDrawable(View view, Drawable drawable) {
-    if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN) {
+    // Test if the SDK version is less than API level 16 (Jelly Bean).
+    if(android.os.Build.VERSION.SDK_INT < 16) {
       view.setBackgroundDrawable(drawable);
     } else {
       view.setBackground(drawable);
