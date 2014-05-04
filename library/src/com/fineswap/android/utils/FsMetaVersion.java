@@ -1,5 +1,5 @@
 /**
- * Meta-backed Versioning Utility - Part of Fineswap Android Utilities.
+ * Meta-data-backed Versioning Utility - Part of Fineswap Android Utilities.
  * Copyright (C) 2014 Fineswap Blog & App. All rights reserved.
  * http://fineswap.com/
  *
@@ -52,6 +52,7 @@ public class FsMetaVersion<T> extends FsVersion {
    * @param classId {@link #classId}
    * @param data {@link #data}
    * @param major {@link #major}
+   * @since 1.0
    */
   public FsMetaVersion(String classId, T data, int major) {
     super(classId, major);
@@ -66,6 +67,7 @@ public class FsMetaVersion<T> extends FsVersion {
    * @param data {@link #data}
    * @param major {@link #major}
    * @param minor {@link #minor}
+   * @since 1.0
    */
   public FsMetaVersion(String classId, T data, int major, int minor) {
     super(classId, major, minor);
@@ -81,6 +83,7 @@ public class FsMetaVersion<T> extends FsVersion {
    * @param major {@link #major}
    * @param minor {@link #minor}
    * @param patch {@link #patch}
+   * @since 1.0
    */
   public FsMetaVersion(String classId, T data, int major, int minor, int patch) {
     super(classId, major, minor, patch);
