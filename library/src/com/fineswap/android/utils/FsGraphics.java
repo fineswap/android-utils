@@ -33,7 +33,6 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 
@@ -77,6 +76,23 @@ public class FsGraphics {
     return channels;
   }
 
+  public static ViewGroup getRootContentView(Activity activity) {
+    try {
+      // Activity's root content view.
+      ViewGroup contentView = (ViewGroup)((ViewGroup)activity.getWindow().findViewById(Window.ID_ANDROID_CONTENT)).getChildAt(0);
+
+      // Just to force a NullPointerException if activityContent is null.
+      contentView.getId();
+
+      return contentView;
+    } catch(ClassCastException e) {
+      e.printStackTrace();
+    } catch(NullPointerException e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
   /**
    * Get the height, in pixels, of the activity's status bar.
    * If the activity has no status bar, zero will be returned.
@@ -88,18 +104,9 @@ public class FsGraphics {
    */
   public static int getStatusBarHeight(Activity activity) {
     try {
-      // Activity's main window.
-      Window window = activity.getWindow();
-
-      // Find the activity's top content view.
-      View activityContent = ((ViewGroup)window.findViewById(Window.ID_ANDROID_CONTENT)).getChildAt(0);
-
-      // Just to force a NullPointerException if activityContent is null.
-      activityContent.getId();
-
       // Retrieve the overall visible display size of the content view.
       Rect rect = new Rect();
-      window.getDecorView().getWindowVisibleDisplayFrame(rect);
+      activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(rect);
 
       // Top position of the content view rests just below the status bar.
       return rect.top;
@@ -111,5 +118,4 @@ public class FsGraphics {
 
     return -1;
   }
-
 }
