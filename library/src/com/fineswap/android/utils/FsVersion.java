@@ -39,6 +39,9 @@ public class FsVersion
     com.fineswap.android.aux.FsSystem,
     com.fineswap.android.aux.FsException {
 
+  private final static NumberFormatException EXCEPTION_NUMBER_ERROR =
+    new NumberFormatException();
+
   /**
    * A unique identifier for this object.
    *
@@ -66,6 +69,18 @@ public class FsVersion
    * @since 1.0
    */
   public final int patch;
+
+  public static int[] parse(String version) throws NumberFormatException {
+    String[] parsed = PATTERN_DOT.split(version, 3);
+    if(null == parsed || 1 > parsed.length) {
+      throw EXCEPTION_NUMBER_ERROR;
+    }
+    int[] parts = new int[3];
+    parts[0] = Integer.parseInt(parsed[0]);
+    parts[1] = 1 < parsed.length ? Integer.parseInt(parsed[1]) : 0;
+    parts[2] = 2 < parsed.length ? Integer.parseInt(parsed[2]) : 0;
+    return parts;
+  }
 
   /**
    * Instantiates a new versioning object with the specified class id and
@@ -117,21 +132,18 @@ public class FsVersion
    * version representation (as a string).
    *
    * @param classId {@link #classId}
-   * @param versionRep {@link #getFullVersion()}
+   * @param version {@link #getFullVersion()}
    * @since 1.0
    */
-  public FsVersion(String classId, String versionRep) throws NumberFormatException {
-    if(null == classId || null == versionRep) {
+  public FsVersion(String classId, String version) throws NumberFormatException {
+    if(null == classId || null == version) {
       throw EXCEPTION_NULL_VALUE;
     }
-    String[] parsed = PATTERN_DOT.split(versionRep, 3);
-    if(null == parsed || 1 > parsed.length) {
-      throw new NumberFormatException();
-    }
+    int[] parts = FsVersion.parse(version);
     this.classId = classId;
-    this.major = Integer.parseInt(parsed[0]);
-    this.minor = 1 < parsed.length ? Integer.parseInt(parsed[1]) : 0;
-    this.patch = 2 < parsed.length ? Integer.parseInt(parsed[2]) : 0;
+    this.major = parts[0];
+    this.minor = parts[1];
+    this.patch = parts[2];
   }
 
   /**
