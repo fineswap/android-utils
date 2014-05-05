@@ -76,6 +76,14 @@ public class FsGraphics {
     return channels;
   }
 
+  /**
+   * Get an Activity's top-level content view. If none has been specified, or if
+   * an error occurred during detection, null will returned.
+   *
+   * @param activity Target Activity to probe
+   * @return Activity's top-level content view
+   * @since 1.0
+   */
   public static ViewGroup getRootContentView(Activity activity) {
     try {
       // Activity's root content view.
