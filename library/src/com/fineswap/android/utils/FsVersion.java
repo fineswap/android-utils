@@ -70,6 +70,15 @@ public class FsVersion
    */
   public final int patch;
 
+  /**
+   * Parse a string representation of a version (x.y.z) and return its parts as
+   * an integer array.
+   *
+   * @param version Version, as a string, to parse
+   * @return Parsed parts of the version
+   * @throws NumberFormatException
+   * @since 1.0
+   */
   public static int[] parse(String version) throws NumberFormatException {
     String[] parsed = PATTERN_DOT.split(version, 3);
     if(null == parsed || 1 > parsed.length) {
