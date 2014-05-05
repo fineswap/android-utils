@@ -36,6 +36,13 @@ import java.util.regex.Pattern;
 public interface FsSystem {
 
   /**
+   * A buffer size suitable for working with file operations.
+   *
+   * @since 1.0
+   */
+  public final static int FILEOP_BUFFER_SIZE = 2048;
+
+  /**
    * A regular expression pattern to match a dot.
    *
    * @since 1.0
