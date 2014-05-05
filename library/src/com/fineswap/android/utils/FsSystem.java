@@ -392,4 +392,24 @@ public class FsSystem implements com.fineswap.android.aux.FsSystem {
     }
   }
 
+  /**
+   * If the specified directory is a file, it will be removed prior to creating
+   * the directory.
+   *
+   * @param dir Directory to create
+   * @return True if the directory either exists or was created, false otherwise
+   * @since 1.0
+   */
+  public static boolean mkdirs(File dir) {
+    if(null != dir) {
+      if(dir.isFile()) {
+        dir.delete();
+      }
+      if(dir.isDirectory() || dir.mkdirs()) {
+        return true;
+      }
+    }
+    return false;
+  }
+
 }
