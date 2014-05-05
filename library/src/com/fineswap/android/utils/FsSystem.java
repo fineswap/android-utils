@@ -29,9 +29,12 @@ package com.fineswap.android.utils;
 
 import android.content.Context;
 import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -47,7 +50,7 @@ import java.security.NoSuchAlgorithmException;
  * @author Noor Dawod
  * @since 1.0
  */
-public class FsSystem {
+public class FsSystem implements com.fineswap.android.aux.FsSystem {
 
   /**
    * Compute the SHA-1 digest hash for the specified
@@ -213,7 +216,7 @@ public class FsSystem {
    * @since 1.0
    */
   public static byte[] readFile(File file) {
-    return readFile(file, 2048);
+    return readFile(file, FILEOP_BUFFER_SIZE);
   }
 
   /**
@@ -246,6 +249,114 @@ public class FsSystem {
       }
     }
     return null;
+  }
+
+  /**
+   * Generate a random file name, either for a file or a directory, which is
+   * located alongside the original file (same directory location).
+   *
+   * @param file Source file to consider
+   * @return Temporary file
+   * @since 1.0
+   */
+  public static File getTempFileName(File file) {
+    if(null != file) {
+      // Full path to this file.
+      String filePath = file.getAbsolutePath();
+
+      // Temporary file name.
+      String tempName = System.currentTimeMillis() + ".tmp";
+
+      // In case of a directory, there's no need to add the directory separator.
+      File tempFile;
+      if(file.isDirectory()) {
+        tempFile = new File(filePath + "-" + tempName);
+      } else {
+        // The directory name containing this file.
+        String fileDir = File.separator.equals(filePath)
+          ? File.separator
+          : filePath.substring(0, filePath.lastIndexOf(File.separatorChar));
+
+        // A new temporary file inside the parent directory.
+        tempFile = new File(fileDir, tempName);
+      }
+      return tempFile;
+    }
+    return null;
+  }
+
+  /**
+   * Write the passed byte-array into the specified file using the default
+   * chunk size. If this file exists, it will be overwritten.
+   *
+   * @param file Target file to write to
+   * @param bytes Contents to write to the file
+   * @return True if all bytes were written successfully, false otherwise
+   * @throws IOException
+   * @since 1.0
+   */
+  public static boolean writeFile(File file, byte[] bytes) throws IOException {
+    return writeFile(file, bytes, FILEOP_BUFFER_SIZE);
+  }
+
+  /**
+   * Write the passed byte-array into the specified file using the passed chunk
+   * size. If this file exists, it will be overwritten.
+   *
+   * @param file Target file to write to
+   * @param bytes Contents to write to the file
+   * @param chunkSize Size of each chunk of data to write to the file
+   * @return True if all bytes were written successfully, false otherwise
+   * @throws IOException
+   * @since 1.0
+   */
+  public static boolean writeFile(File file, byte[] bytes, int chunkSize) throws IOException {
+    if(null != file && null != bytes && !file.isDirectory()) {
+      // In order not to overwrite an existing file in a case of a problem,
+      // we first write the bytes in a file with a different name. When all
+      // is successful, we remove the existing one (if it exists) and rename the
+      // file.
+      File tempPath = getTempFileName(file);
+
+      // Remove this temporary file, in case it exists.
+      tempPath.delete();
+
+      // Position of the writing pin, and length of the bytes to write.
+      int pos = 0, length = bytes.length;
+
+      // Try to write the contents into the temporary file.
+      InputStream is = null;
+      BufferedOutputStream os = null;
+      try {
+        is = new ByteArrayInputStream(bytes);
+        os = new BufferedOutputStream(new FileOutputStream(tempPath), chunkSize);
+
+        // Writing loop.
+        while(length > pos) {
+          if(length < pos + chunkSize) {
+            chunkSize = length - pos;
+          }
+          os.write(bytes, pos, chunkSize);
+          pos += chunkSize;
+        }
+        os.flush();
+      } catch(IOException e) {
+        e.printStackTrace();
+      } finally {
+        closeStream(os);
+        closeStream(is);
+      }
+
+      // If the writing pin is at the end, writing was successful.
+      if(pos == length) {
+        // Time to remove existing file...
+        file.delete();
+
+        // And to rename temporary file.
+        return tempPath.renameTo(file);
+      }
+    }
+    return false;
   }
 
 }
