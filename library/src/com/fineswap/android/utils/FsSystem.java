@@ -359,4 +359,37 @@ public class FsSystem implements com.fineswap.android.aux.FsSystem {
     return false;
   }
 
+  /**
+   * Recursively delete a directory's files and sub-directories, including
+   * itself.
+   *
+   * @param dir Directory to clean out
+   * @since 1.0
+   */
+  public static void rmdir(File dir) {
+    rmdir(dir, true);
+  }
+
+  /**
+   * Recursively delete a directory's files and sub-directories, optionally
+   * keeping itself when empty.
+   *
+   * @param dir Directory to clean out
+   * @param removeSelf Whether to remove the directory itself when it's clean
+   * @since 1.0
+   */
+  public static void rmdir(File dir, boolean removeSelf) {
+    if(null != dir && !".".equals(dir.getName()) && !"..".equals(dir.getName())) {
+      if(dir.isDirectory()) {
+        File[] files = dir.listFiles();
+        for(File file : files) {
+          rmdir(file, true);
+        }
+      }
+      if(removeSelf) {
+        dir.delete();
+      }
+    }
+  }
+
 }
