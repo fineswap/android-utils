@@ -206,7 +206,34 @@ public class FsVersion
   }
 
   /**
-   * Tests whether the version identified by specified parameters is newer than
+   * Test whether the version identified by specified parameters is equal to
+   * this version.
+   *
+   * @param versionMajor {@link #major}
+   * @param versionMinor {@link #minor}
+   * @return True if and only if the passed version is equal, false otherwise
+   * @since 1.0
+   */
+  public boolean isEqualTo(int versionMajor, int versionMinor) {
+    return isEqualTo(versionMajor, versionMinor, 0);
+  }
+
+  /**
+   * Test whether the version identified by specified parameters is equal to
+   * this version.
+   *
+   * @param versionMajor {@link #major}
+   * @param versionMinor {@link #minor}
+   * @param versionPatch {@link #patch}
+   * @return True if and only if the passed version is equal, false otherwise
+   * @since 1.0
+   */
+  public boolean isEqualTo(int versionMajor, int versionMinor, int versionPatch) {
+    return major == versionMajor && minor == versionMinor && patch == versionPatch;
+  }
+
+  /**
+   * Test whether the version identified by specified parameters is newer than
    * this version.
    *
    * @param versionMajor {@link #major}
@@ -221,7 +248,7 @@ public class FsVersion
   }
 
   /**
-   * Tests whether the version identified by specified parameters is newer than
+   * Test whether the version identified by specified parameters is newer than
    * this version.
    *
    * @param versionMajor {@link #major}
@@ -237,7 +264,7 @@ public class FsVersion
   }
 
   /**
-   * Tests whether the passed version is newer than this version.
+   * Test whether the passed version is newer than this version.
    *
    * @see FsVersion
    * @param version The version to test against
@@ -249,7 +276,7 @@ public class FsVersion
   }
 
   /**
-   * Tests whether the version identified by specified parameters is older than
+   * Test whether the version identified by specified parameters is older than
    * this version.
    *
    * @param versionMajor {@link #major}
@@ -264,7 +291,7 @@ public class FsVersion
   }
 
   /**
-   * Tests whether the version identified by specified parameters is older than
+   * Test whether the version identified by specified parameters is older than
    * this version.
    *
    * @param versionMajor {@link #major}
@@ -280,7 +307,7 @@ public class FsVersion
   }
 
   /**
-   * Tests whether the passed version is older than this version.
+   * Test whether the passed version is older than this version.
    *
    * @see FsVersion
    * @param version The version to test against
