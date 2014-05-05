@@ -142,6 +142,7 @@ public class FsVersion
    *
    * @param classId {@link #classId}
    * @param version {@link #getFullVersion()}
+   * @throws NumberFormatException
    * @since 1.0
    */
   public FsVersion(String classId, String version) throws NumberFormatException {
@@ -209,6 +210,20 @@ public class FsVersion
    * Test whether the version identified by specified parameters is equal to
    * this version.
    *
+   * @param version {@link #parse(java.lang.String)} Version representation to test
+   * @return True if and only if the passed version is equal, false otherwise
+   * @throws NumberFormatException
+   * @since 1.0
+   */
+  public boolean isEqualTo(String version) throws NumberFormatException {
+    int[] parts = parse(version);
+    return isEqualTo(parts[0], parts[1], parts[2]);
+  }
+
+  /**
+   * Test whether the version identified by specified parameters is equal to
+   * this version.
+   *
    * @param versionMajor {@link #major}
    * @param versionMinor {@link #minor}
    * @return True if and only if the passed version is equal, false otherwise
@@ -230,6 +245,20 @@ public class FsVersion
    */
   public boolean isEqualTo(int versionMajor, int versionMinor, int versionPatch) {
     return major == versionMajor && minor == versionMinor && patch == versionPatch;
+  }
+
+  /**
+   * Test whether the version identified by specified string is newer than
+   * this version.
+   *
+   * @param version {@link #parse(java.lang.String)} Version representation to test
+   * @return True if and only if the passed version is newer, false otherwise
+   * @throws NumberFormatException
+   * @since 1.0
+   */
+  public boolean isNewerThan(String version) throws NumberFormatException {
+    int[] parts = parse(version);
+    return isNewerThan(parts[0], parts[1], parts[2]);
   }
 
   /**
@@ -273,6 +302,20 @@ public class FsVersion
    */
   public boolean isNewerThan(FsVersion version) {
     return isNewerThan(version.major, version.minor, version.patch);
+  }
+
+  /**
+   * Test whether the version identified by specified string is older than
+   * this version.
+   *
+   * @param version {@link #parse(java.lang.String)} Version representation to test
+   * @return True if and only if the passed version is older, false otherwise
+   * @throws NumberFormatException
+   * @since 1.0
+   */
+  public boolean isOlderThan(String version) throws NumberFormatException {
+    int[] parts = parse(version);
+    return isOlderThan(parts[0], parts[1], parts[2]);
   }
 
   /**
