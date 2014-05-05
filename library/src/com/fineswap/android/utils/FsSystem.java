@@ -28,7 +28,15 @@
 package com.fineswap.android.utils;
 
 import android.content.Context;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Reader;
+import java.io.Writer;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -148,6 +156,96 @@ public class FsSystem {
       }
     }
     return cacheDir;
+  }
+
+  /**
+   * Safely close an I/O stream without raising an {@link IOException}.
+   *
+   * @param stream I/O stream to close
+   * @since 1.0
+   */
+  public static void closeStream(Object stream) {
+    if(null != stream) {
+      try {
+        if(stream instanceof InputStream) {
+          ((InputStream)stream).close();
+        } else if(stream instanceof OutputStream) {
+          ((OutputStream)stream).close();
+        } else if(stream instanceof Reader) {
+          ((Reader)stream).close();
+        } else if(stream instanceof Writer) {
+          ((Writer)stream).close();
+        }
+      } catch(IOException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  /**
+   * Read file's contents into a byte-array using default buffer size.
+   *
+   * @param filePath Absolute file path
+   * @return File contents, or null if an error occurs
+   * @since 1.0
+   */
+  public static byte[] readFile(String filePath) {
+    return readFile(new File(filePath));
+  }
+
+  /**
+   * Read file's contents into a byte-array using specified buffer size.
+   *
+   * @param filePath Absolute file path
+   * @param bufferSize Size of read buffer to use
+   * @return File contents, or null if an error occurs
+   * @since 1.0
+   */
+  public static byte[] readFile(String filePath, int bufferSize) {
+    return readFile(new File(filePath), bufferSize);
+  }
+
+  /**
+   * Read file's contents into a byte-array using default buffer size.
+   *
+   * @param file Absolute file path
+   * @return File contents, or null if an error occurs
+   * @since 1.0
+   */
+  public static byte[] readFile(File file) {
+    return readFile(file, 2048);
+  }
+
+  /**
+   * Read file's contents into a byte-array using specified buffer size.
+   *
+   * @param file Absolute file path
+   * @param bufferSize Size of read buffer to use
+   * @return File contents, or null if an error occurs
+   * @since 1.0
+   */
+  public static byte[] readFile(File file, int bufferSize) {
+    if(file.isFile() && file.canRead()) {
+      InputStream is = null;
+      ByteArrayOutputStream os = null;
+      try {
+        is = new BufferedInputStream(new FileInputStream(file), bufferSize);
+        os = new ByteArrayOutputStream();
+        int bytesRead;
+        byte[] buffer = new byte[bufferSize];
+        while(-1 != (bytesRead = is.read(buffer, 0, buffer.length))) {
+          os.write(buffer, 0, bytesRead);
+        }
+        os.flush();
+        return os.toByteArray();
+      } catch(IOException e) {
+        e.printStackTrace();
+      } finally {
+        closeStream(os);
+        closeStream(is);
+      }
+    }
+    return null;
   }
 
 }
