@@ -62,7 +62,13 @@ public class Main extends Activity {
     // Instantiate a new slide (page) to be added to the overlay.
     // Each slide has an accompanying layout which will be inflated dynamically.
     // The contents of this layout is entirely up to the developer/designer.
-    FsSlideResource slide = new FsSlideResource(new FsMetaVersion(SLIDE_FRONT, R.layout.overlay_front_page, SLIDE_FRONT_VER));
+    FsSlideResource slide = new FsSlideResource(
+      new FsMetaVersion(
+        R.layout.overlay_front_page,  // Layout to be inflated for this slide
+        SLIDE_FRONT,                  // Unique name for this slide
+        SLIDE_FRONT_VER               // The slide's version (bump up to show again)
+      )
+    );
 
     // An area on the page that is associated with a slide is called a ring.
     // Each ring may maintain its own Look-And-Feel, but for practicality reasons,
@@ -77,32 +83,41 @@ public class Main extends Activity {
     // is shown/hidden based on previous history of the slide, and whether the
     // page contains rings that are associated with the content.
     slide.addRingResource(new FsRingResource(
-      new FsMetaVersion(RING_LOGIN, laf, ALL_RINGS_VER),  // A new ring with its own LAF
+      new FsMetaVersion(laf, RING_LOGIN, ALL_RINGS_VER),  // A new ring with its own LAF
       R.id.front_page_btn_login,                          // A button in the page
       R.id.overlay_front_page_login                       // An area in the slide
     ));
     slide.addRingResource(new FsRingResource(
-      new FsMetaVersion("camera", laf, ALL_RINGS_VER),
+      new FsMetaVersion(laf, "camera", ALL_RINGS_VER),
       R.id.front_page_btn_contact,
       R.id.overlay_front_page_contact
     ));
     slide.addRingResource(new FsRingResource(
-      new FsMetaVersion("refresh", laf, ALL_RINGS_VER),
+      new FsMetaVersion(laf, "refresh", ALL_RINGS_VER),
       R.id.front_page_btn_share,
       R.id.overlay_front_page_share
     ));
 
     // Set click handler for buttons that may exist in the slide's inflated layout.
-    slide.setOnClickListener(R.id.overlay_front_page_btn_ok, new FsSlideResource.OnClickHandler() {
-      @Override
-      public void onClick(final FsSlideResource slide, final View view) {
-        // Dismiss the overlay and garbage-collect any retained resources.
-        slide.getIntroOverlay().destroy();
+    slide.setOnClickListener(
+      R.id.overlay_front_page_btn_ok,         // Button id in the inflated layout
+      new FsSlideResource.OnClickHandler() {  // Click handler
+        @Override
+        public void onClick(final FsSlideResource slide, final View view) {
+          // Dismiss the overlay and garbage-collect any retained resources.
+          slide.getIntroOverlay().destroy();
+        }
       }
-    });
+    );
 
     // Instantiate a new instance.
-    FsIntroOverlay intro = FsIntroFactory.getInstance(new FsMetaVersion(INTRO_PAGE, this, INTRO_VERSION));
+    FsIntroOverlay intro = FsIntroFactory.getInstance(
+      new FsMetaVersion(
+        this,           // Running Activity
+        INTRO_PAGE,     // Unique name for this instance
+        INTRO_VERSION   // Version of this instance
+      )
+    );
 
     // Attach this slide to the overlay instance.
     intro.attach(slide);
@@ -245,11 +260,23 @@ Terms of Use
 
     Copyright (C) 2014 Fineswap Blog & App
 
-    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to
+    deal in the Software without restriction, including without limitation the
+    rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+    sell copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
 
-    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+    The above copyright notice and this permission notice shall be included in
+    all copies or substantial portions of the Software.
 
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+    FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+    IN THE SOFTWARE.
 
 [Fineswap]:           http://fineswap.com/                                      "Fineswap Blog & App"
 [CHANGELOG]:          https://github.com/fineswap/android-utils/wiki            "CHANGELOG Wiki Page"
