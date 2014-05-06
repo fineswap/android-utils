@@ -49,12 +49,12 @@ public class FsMetaVersion<T> extends FsVersion {
    * Instantiates a new meta-data-backed versioning object with the specified
    * class id, meta-data and major; uses default settings for minor and patch.
    *
-   * @param classId {@link #classId}
    * @param data {@link #data}
+   * @param classId {@link #classId}
    * @param major {@link #major}
    * @since 1.0
    */
-  public FsMetaVersion(String classId, T data, int major) {
+  public FsMetaVersion(T data, String classId, int major) {
     super(classId, major);
     this.data = data;
   }
@@ -63,13 +63,13 @@ public class FsMetaVersion<T> extends FsVersion {
    * Instantiates a new meta-data-backed versioning object with the specified
    * class id, meta-data, major and minor; uses default value for patch.
    *
-   * @param classId {@link #classId}
    * @param data {@link #data}
+   * @param classId {@link #classId}
    * @param major {@link #major}
    * @param minor {@link #minor}
    * @since 1.0
    */
-  public FsMetaVersion(String classId, T data, int major, int minor) {
+  public FsMetaVersion(T data, String classId, int major, int minor) {
     super(classId, major, minor);
     this.data = data;
   }
@@ -78,14 +78,14 @@ public class FsMetaVersion<T> extends FsVersion {
    * Instantiates a new meta-data-backed versioning object with the specified
    * class id, meta-data and major, minor and patch level.
    *
-   * @param classId {@link #classId}
    * @param data {@link #data}
+   * @param classId {@link #classId}
    * @param major {@link #major}
    * @param minor {@link #minor}
    * @param patch {@link #patch}
    * @since 1.0
    */
-  public FsMetaVersion(String classId, T data, int major, int minor, int patch) {
+  public FsMetaVersion(T data, String classId, int major, int minor, int patch) {
     super(classId, major, minor, patch);
     this.data = data;
   }
