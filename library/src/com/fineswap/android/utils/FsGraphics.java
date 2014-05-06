@@ -33,8 +33,6 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.view.ViewGroup;
-import android.view.Window;
 
 /**
  * A collection of helpful, static functions for dealing with graphics subsystem.
@@ -74,31 +72,6 @@ public class FsGraphics {
     channels[2] = Color.green(color);
     channels[3] = Color.blue(color);
     return channels;
-  }
-
-  /**
-   * Get an Activity's top-level content view. If none has been specified, or if
-   * an error occurred during detection, null will returned.
-   *
-   * @param activity Target Activity to probe
-   * @return Activity's top-level content view
-   * @since 1.0
-   */
-  public static ViewGroup getRootContentView(Activity activity) {
-    try {
-      // Activity's root content view.
-      ViewGroup contentView = (ViewGroup)((ViewGroup)activity.getWindow().findViewById(Window.ID_ANDROID_CONTENT)).getChildAt(0);
-
-      // Just to force a NullPointerException if activityContent is null.
-      contentView.getId();
-
-      return contentView;
-    } catch(ClassCastException e) {
-      e.printStackTrace();
-    } catch(NullPointerException e) {
-      e.printStackTrace();
-    }
-    return null;
   }
 
   /**

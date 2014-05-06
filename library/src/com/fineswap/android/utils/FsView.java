@@ -27,9 +27,11 @@
 
 package com.fineswap.android.utils;
 
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import java.util.Collection;
@@ -61,6 +63,31 @@ public class FsView {
     } else {
       view.setBackground(drawable);
     }
+  }
+
+  /**
+   * Get an Activity's top-level content view. If none has been specified, or if
+   * an error occurred during detection, null will returned.
+   *
+   * @param activity Target Activity to probe
+   * @return Activity's top-level content view
+   * @since 1.0
+   */
+  public static ViewGroup getRootContentView(Activity activity) {
+    try {
+      // Activity's root content view.
+      ViewGroup contentView = (ViewGroup)((ViewGroup)activity.getWindow().findViewById(Window.ID_ANDROID_CONTENT)).getChildAt(0);
+
+      // Just to force a NullPointerException if activityContent is null.
+      contentView.getId();
+
+      return contentView;
+    } catch(ClassCastException e) {
+      e.printStackTrace();
+    } catch(NullPointerException e) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
   /**

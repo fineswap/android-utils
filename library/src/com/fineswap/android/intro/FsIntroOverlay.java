@@ -194,7 +194,7 @@ public class FsIntroOverlay
   FsIntroOverlay(FsMetaVersion<Activity> activityVersion) {
     // Make sure the
     // Get activity's root content view.
-    activityContentView = FsGraphics.getRootContentView(activityVersion.data);
+    activityContentView = FsView.getRootContentView(activityVersion.data);
     if(null == activityContentView) {
       throw EXCEPTION_CONTENT_VIEW_NULL_OR_EMPTY;
     }
