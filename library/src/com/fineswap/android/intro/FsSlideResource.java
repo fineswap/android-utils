@@ -251,7 +251,6 @@ public class FsSlideResource implements com.fineswap.android.aux.FsLayout {
   /**
    * Instantiates a new slide instance using default tint color and ring count.
    *
-   * @see IntroOverlay#defaultTintColor
    * @param slide {@link #slide}
    * @since 1.0
    */
@@ -262,7 +261,6 @@ public class FsSlideResource implements com.fineswap.android.aux.FsLayout {
   /**
    * Instantiates a new slide instance using default ring count.
    *
-   * @see IntroOverlay#defaultRingCount
    * @param slide {@link #slide}
    * @param tintColor {@link #tintColor}
    * @since 1.0

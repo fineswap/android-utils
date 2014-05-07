@@ -292,10 +292,9 @@ public class FsSystem implements com.fineswap.android.aux.FsSystem {
    * @param file Target file to write to
    * @param bytes Contents to write to the file
    * @return True if all bytes were written successfully, false otherwise
-   * @throws IOException
    * @since 1.0
    */
-  public static boolean writeFile(File file, byte[] bytes) throws IOException {
+  public static boolean writeFile(File file, byte[] bytes) {
     return writeFile(file, bytes, FILEOP_BUFFER_SIZE);
   }
 
@@ -307,10 +306,9 @@ public class FsSystem implements com.fineswap.android.aux.FsSystem {
    * @param bytes Contents to write to the file
    * @param chunkSize Size of each chunk of data to write to the file
    * @return True if all bytes were written successfully, false otherwise
-   * @throws IOException
    * @since 1.0
    */
-  public static boolean writeFile(File file, byte[] bytes, int chunkSize) throws IOException {
+  public static boolean writeFile(File file, byte[] bytes, int chunkSize) {
     if(null != file && null != bytes && !file.isDirectory()) {
       // In order not to overwrite an existing file in a case of a problem,
       // we first write the bytes in a file with a different name. When all

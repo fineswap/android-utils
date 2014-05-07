@@ -76,7 +76,7 @@ public class FsVersion
    *
    * @param version Version, as a string, to parse
    * @return Parsed parts of the version
-   * @throws NumberFormatException
+   * @throws NumberFormatException If the specified version is invalid
    * @since 1.0
    */
   public static int[] parse(String version) throws NumberFormatException {
@@ -142,7 +142,7 @@ public class FsVersion
    *
    * @param classId {@link #classId}
    * @param version {@link #getFullVersion()}
-   * @throws NumberFormatException
+   * @throws NumberFormatException If the specified version is invalid
    * @since 1.0
    */
   public FsVersion(String classId, String version) throws NumberFormatException {
@@ -212,7 +212,7 @@ public class FsVersion
    *
    * @param version {@link #parse(String)} Version representation to test
    * @return True if and only if the passed version is equal, false otherwise
-   * @throws NumberFormatException
+   * @throws NumberFormatException If the specified version is invalid
    * @since 1.0
    */
   public boolean isEqualTo(String version) throws NumberFormatException {
@@ -253,7 +253,7 @@ public class FsVersion
    *
    * @param version {@link #parse(String)} Version representation to test
    * @return True if and only if the passed version is newer, false otherwise
-   * @throws NumberFormatException
+   * @throws NumberFormatException If the specified version is invalid
    * @since 1.0
    */
   public boolean isNewerThan(String version) throws NumberFormatException {
@@ -310,7 +310,7 @@ public class FsVersion
    *
    * @param version {@link #parse(String)} Version representation to test
    * @return True if and only if the passed version is older, false otherwise
-   * @throws NumberFormatException
+   * @throws NumberFormatException If the specified version is invalid
    * @since 1.0
    */
   public boolean isOlderThan(String version) throws NumberFormatException {

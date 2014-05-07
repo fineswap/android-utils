@@ -56,7 +56,7 @@ public class FsIntroFileDatabase
    * cannot be created, or its value is null, an exception is raised.
    *
    * @param databaseDir Destination directory to keep statistics
-   * @throw IllegalStateException
+   * @since 1.0
    */
   public FsIntroFileDatabase(File databaseDir) {
     if(null == databaseDir) {
@@ -73,7 +73,7 @@ public class FsIntroFileDatabase
 
   /**
    * @param introOverlay {@link FsIntroFactory.PersistentDatabase#isNewIntro(FsIntroOverlay)}
-   * @return
+   * @return {@link FsIntroFactory.PersistentDatabase#isNewIntro(FsIntroOverlay)}
    * @since 1.0
    */
   public boolean isNewIntro(FsIntroOverlay introOverlay) {
@@ -98,6 +98,7 @@ public class FsIntroFileDatabase
 
   /**
    * @param slideResource {@link FsIntroFactory.PersistentDatabase#isNewSlide(FsSlideResource)}
+   * @return {@link FsIntroFactory.PersistentDatabase#isNewSlide(FsSlideResource)}
    * @since 1.0
    */
   public boolean isNewSlide(FsSlideResource slideResource) {
@@ -123,6 +124,7 @@ public class FsIntroFileDatabase
   /**
    * @param slideResource {@link FsIntroFactory.PersistentDatabase#isNewRing(FsSlideResource, FsRingResource)}
    * @param ringResource {@link FsIntroFactory.PersistentDatabase#isNewRing(FsSlideResource, FsRingResource)}
+   * @return {@link FsIntroFactory.PersistentDatabase#isNewRing(FsSlideResource, FsRingResource)}
    * @since 1.0
    */
   public boolean isNewRing(FsSlideResource slideResource, FsRingResource ringResource) {

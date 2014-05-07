@@ -97,7 +97,7 @@ public class FsMetaVersion<T> extends FsVersion {
    * @param data {@link #data}
    * @param classId {@link #classId}
    * @param version {@link #getFullVersion()}
-   * @throws NumberFormatException
+   * @throws NumberFormatException If the specified version is invalid
    * @since 1.0
    */
   public FsMetaVersion(T data, String classId, String version) throws NumberFormatException {
@@ -106,7 +106,6 @@ public class FsMetaVersion<T> extends FsVersion {
   }
 
   /**
-   * @return
    * @since 1.0
    */
   @Override
@@ -121,7 +120,6 @@ public class FsMetaVersion<T> extends FsVersion {
   }
 
   /**
-   * @return
    * @since 1.0
    */
   @Override
