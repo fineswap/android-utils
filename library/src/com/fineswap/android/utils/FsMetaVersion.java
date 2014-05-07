@@ -91,6 +91,21 @@ public class FsMetaVersion<T> extends FsVersion {
   }
 
   /**
+   * Instantiates a new meta-data-backed versioning object with the specified
+   * class id and version representation (as a string).
+   *
+   * @param data {@link #data}
+   * @param classId {@link #classId}
+   * @param version {@link #getFullVersion()}
+   * @throws NumberFormatException
+   * @since 1.0
+   */
+  public FsMetaVersion(T data, String classId, String version) throws NumberFormatException {
+    super(classId, version);
+    this.data = data;
+  }
+
+  /**
    * @return
    * @since 1.0
    */
