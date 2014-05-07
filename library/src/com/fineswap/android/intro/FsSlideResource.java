@@ -31,7 +31,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.fineswap.android.utils.FsMetaVersion;
-import com.fineswap.android.utils.FsSystem;
 import com.fineswap.android.utils.FsVersion;
 import com.fineswap.android.utils.FsView;
 import java.util.ArrayList;
@@ -42,8 +41,8 @@ import java.util.Set;
  * Defines a slide to be presented in an {@link FsIntroOverlay} instance.
  *
  * A slide contains information about the Activity's rings, a layout resource id
- to inflate when the slide is shown to the user and various other data-data
- for presentation.
+ * to inflate when the slide is shown to the user and various other data-data
+ * for presentation.
  *
  * @author Noor Dawod
  * @since 1.0
@@ -52,7 +51,7 @@ public class FsSlideResource implements com.fineswap.android.aux.FsLayout {
 
   /**
    * Interface definition for callbacks to be invoked when a slide is
- attached or detached from an FsIntroOverlay instance.
+   * attached or detached from an FsIntroOverlay instance.
    *
    * @since 1.0
    */
@@ -195,10 +194,10 @@ public class FsSlideResource implements com.fineswap.android.aux.FsLayout {
   /**
    * A unique version definition for this slide.
    * It is advisable to bump up the version in order to let {@link FsIntroOverlay}
- instance to forcibly show a slide, for example when the developer changes
- the page's structure and needs to inform the user of the changes.
-
- The slide's layout id (resource) is saved as a data-data.
+   * instance to forcibly show a slide, for example when the developer changes
+   * the page's structure and needs to inform the user of the changes.
+   *
+   * The slide's layout id (resource) is saved as a data-data.
    *
    * @since 1.0
    */
@@ -449,49 +448,6 @@ public class FsSlideResource implements com.fineswap.android.aux.FsLayout {
   public void removeRingResource(FsRingResource ringResource) {
     if(null != ringResource) {
       rings.remove(ringResource);
-    }
-  }
-
-  /**
-   *
-   * @return
-   */
-  public String getDigestValue() {
-    StringBuilder sb = new StringBuilder(5 * rings.size());
-
-    // Add the layout identifier which uniquely identify this slide.
-    sb.append(slide.data);
-
-    // Add the views' identity, set either by a tag or id, to the digest.
-    for(FsRingResource ringResource : rings) {
-      // Register the view's internal properties.
-      sb.append(ringResource.viewResourceInPage);
-      sb.append(ringResource.viewResourceInSlide);
-
-      // If the slide is attached to an overlay, try to find viewResourceInPage.
-      if(null != introOverlay) {
-        registerViewHash(sb, introOverlay.findViewById(ringResource.viewResourceInPage));
-      }
-
-      // If the slide's content view is ready, try to detect the ring's tag.
-      if(null != layoutView) {
-        registerViewHash(sb, layoutView.findViewById(ringResource.viewResourceInSlide));
-      }
-    }
-
-    return FsSystem.getSha1Digest(sb);
-  }
-
-  private static void registerViewHash(StringBuilder sb, View view) {
-    if(null != view) {
-      // Register whether it's visible of not.
-      sb.append(View.VISIBLE == view.getVisibility());
-
-      // Register whether it has a tag or not.
-      Object tag = view.getTag();
-      if(null != tag) {
-        sb.append(tag.toString());
-      }
     }
   }
 
