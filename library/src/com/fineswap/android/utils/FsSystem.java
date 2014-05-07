@@ -149,13 +149,42 @@ public class FsSystem implements com.fineswap.android.aux.FsSystem {
    * @since 1.0
    */
   public static File getCacheDir(Context ctx, FsVersion resource, boolean inDataDirIfNeeded) {
+    return getCacheDir(ctx, resource.toString(), inDataDirIfNeeded);
+  }
+
+  /**
+   * Get a cache directory corresponding to the specified resource.
+   * The directory is created inside context's cache directory and its name is
+   * based on the resource's name. If the directory cannot be created in the
+   * cache directory, it will be created in the data directory.
+   *
+   * @param ctx App context
+   * @param resourceName Resource name to create a corresponding directory for
+   * @return Cache directory for the specified resource, or null on error
+   * @since 1.0
+   */
+  public static File getCacheDir(Context ctx, String resourceName) {
+    return getCacheDir(ctx, resourceName, true);
+  }
+
+  /**
+   * Get a cache directory corresponding to the specified resource.
+   * The directory is created inside context's cache directory and its name is
+   * based on the resource's name and version.
+   *
+   * @param ctx App context
+   * @param resourceName Resource name to create a corresponding directory for
+   * @param inDataDirIfNeeded If the directory cannot be created in cache directory, create it in the data directory
+   * @return Cache directory for the specified resource, or null on error
+   * @since 1.0
+   */
+  public static File getCacheDir(Context ctx, String resourceName, boolean inDataDirIfNeeded) {
     File cacheDir = getCacheDir(ctx);
     if(null != cacheDir) {
-      String dirName = resource.toString();
-      cacheDir = new File(cacheDir, dirName);
+      cacheDir = new File(cacheDir, resourceName);
       cacheDir.mkdirs();
       if(!cacheDir.exists() && inDataDirIfNeeded) {
-        cacheDir = ctx.getDir(dirName, Context.MODE_PRIVATE);
+        cacheDir = ctx.getDir(resourceName, Context.MODE_PRIVATE);
       }
     }
     return cacheDir;
