@@ -30,7 +30,6 @@ package com.fineswap.android.intro;
 import com.fineswap.android.utils.FsSystem;
 import com.fineswap.android.utils.FsVersion;
 import java.io.File;
-import java.io.IOException;
 
 /**
  * A persistent file-based database backend to use with {@link FsIntroOverlay}.
@@ -147,14 +146,10 @@ public class FsIntroFileDatabase
   public void registerRing(FsSlideResource slideResource, FsRingResource ringResource) {
     File slideDatabaseDir = getSlideDatabaseDir(slideResource);
     if(null != slideDatabaseDir) {
-      try {
-        slideDatabaseDir.mkdirs();
-        FsVersion version = ringResource.getVersion();
-        File versionFile = new File(slideDatabaseDir, version.classId);
-        FsSystem.writeFile(versionFile, version.getFullVersion().getBytes());
-      } catch(IOException e) {
-        e.printStackTrace();
-      }
+      slideDatabaseDir.mkdirs();
+      FsVersion version = ringResource.getVersion();
+      File versionFile = new File(slideDatabaseDir, version.classId);
+      FsSystem.writeFile(versionFile, version.getFullVersion().getBytes());
     }
   }
 
