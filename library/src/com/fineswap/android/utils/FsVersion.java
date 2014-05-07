@@ -207,10 +207,10 @@ public class FsVersion
   }
 
   /**
-   * Test whether the version identified by specified parameters is equal to
+   * Test whether the version identified by the specified string is equal to
    * this version.
    *
-   * @param version {@link #parse(java.lang.String)} Version representation to test
+   * @param version {@link #parse(String)} Version representation to test
    * @return True if and only if the passed version is equal, false otherwise
    * @throws NumberFormatException
    * @since 1.0
@@ -251,7 +251,7 @@ public class FsVersion
    * Test whether the version identified by specified string is newer than
    * this version.
    *
-   * @param version {@link #parse(java.lang.String)} Version representation to test
+   * @param version {@link #parse(String)} Version representation to test
    * @return True if and only if the passed version is newer, false otherwise
    * @throws NumberFormatException
    * @since 1.0
@@ -305,10 +305,10 @@ public class FsVersion
   }
 
   /**
-   * Test whether the version identified by specified string is older than
+   * Test whether the version identified by the specified string is older than
    * this version.
    *
-   * @param version {@link #parse(java.lang.String)} Version representation to test
+   * @param version {@link #parse(String)} Version representation to test
    * @return True if and only if the passed version is older, false otherwise
    * @throws NumberFormatException
    * @since 1.0
