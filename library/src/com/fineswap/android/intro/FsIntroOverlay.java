@@ -512,6 +512,15 @@ public class FsIntroOverlay
           int topY = coords[1] - laf.viewPadding - statusBarHeight;
           int bottomY = coords[1] + height + laf.viewPadding - statusBarHeight;
 
+          // Keep the dimension within defined max. value.
+          if(0 < laf.viewMaxDimension && (laf.viewMaxDimension < width || laf.viewMaxDimension < height)) {
+            width = Math.max(width, laf.viewMaxDimension);
+            height = Math.max(height, laf.viewMaxDimension);
+            Log.d(LOG_TAG,
+              "  Restrained size: " + width + "x" + height + " pixels"
+            );
+          }
+
           // Which color to use for the rings?
           int ringColor = laf.isCustomRingColor ? laf.viewRingColor : slideResource.getTintColor();
 
