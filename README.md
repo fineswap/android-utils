@@ -140,7 +140,7 @@ public class Main extends Activity {
   }
 
   private int getDimension(int dimenId) {
-    // Get the actual dimention of the passed resource, and return it.
+    // Get the actual dimension of the passed resource, and return it.
   }
 
   private int getColor(int colorId) {
