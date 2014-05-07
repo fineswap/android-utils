@@ -1,9 +1,9 @@
-Fineswap Android Utilities
-==========================
+Android Utilities
+=================
 
 A collection of reusable interfaces, classes, components and UI utilities for Android.
 
-The complete library is being used, as-is, to power [Fineswap][Fineswap]'s Android app.
+The complete library is being used to power [Fineswap][Fineswap]'s Android app.
 
 ## Features
 * Loosely-coupled classes and utilities
