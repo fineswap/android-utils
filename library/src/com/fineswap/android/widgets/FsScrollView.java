@@ -69,8 +69,6 @@ import java.util.ArrayList;
 public class FsScrollView extends ScrollView {
 
   private final static String TAG_MAGIC_WORD = "nested-parent";
-  private final static RuntimeException EXCEPTION_NESTED_SCROLLVIEWS =
-    new IllegalStateException("Only ont ScrollView could be engaged at a time.");
   private ArrayList<ScrollView> nestedScrollViews;
 
   /**
@@ -166,18 +164,14 @@ public class FsScrollView extends ScrollView {
     }
   }
 
-  private void populateNestedScrollView(View view) {
-    if(view instanceof ScrollView) {
-      Object tag = getTag();
-      if(null != tag && TAG_MAGIC_WORD.equals(tag)) {
-        throw EXCEPTION_NESTED_SCROLLVIEWS;
-      }
-      nestedScrollViews.add((ScrollView)view);
-    } else if(view instanceof ViewGroup) {
-      ViewGroup container = (ViewGroup)view;
-      int childrenCount = container.getChildCount(), child = -1;
-      while(childrenCount > ++child) {
-        populateNestedScrollView(container.getChildAt(child));
+  private void populateNestedScrollView(ViewGroup container) {
+    int childrenCount = container.getChildCount(), child = -1;
+    while(childrenCount > ++child) {
+      View view = container.getChildAt(child);
+      if(view instanceof ScrollView) {
+        nestedScrollViews.add((ScrollView)view);
+      } else if(view instanceof ViewGroup) {
+        populateNestedScrollView((ViewGroup)view);
       }
     }
   }
