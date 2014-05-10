@@ -272,14 +272,6 @@ public class FsIntroFactory {
     }
   }
 
-  /**
-   * Get an instance of {@link FsIntroOverlay} for the specified version of the
-   * activity.
-   *
-   * @param activityVersion Target Activity and version to get an instance for
-   * @return Instance of FsIntroOverlay for the specified activity
-   * @since 1.0
-   */
   static void destroyInstance(FsIntroOverlay instance) {
     synchronized(instances) {
       if(null != instance) {
