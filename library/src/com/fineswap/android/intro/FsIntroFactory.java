@@ -265,10 +265,26 @@ public class FsIntroFactory {
       for(FsMetaVersion<Activity> activityVersion : activitiesVersions) {
         FsIntroOverlay activityInstance = instances.get(activityVersion);
         if(null != activityInstance) {
-          activityInstance.destroy();
+          activityInstance.destroyInternal(false);
         }
       }
       instances.clear();
+    }
+  }
+
+  /**
+   * Get an instance of {@link FsIntroOverlay} for the specified version of the
+   * activity.
+   *
+   * @param activityVersion Target Activity and version to get an instance for
+   * @return Instance of FsIntroOverlay for the specified activity
+   * @since 1.0
+   */
+  static void destroyInstance(FsIntroOverlay instance) {
+    synchronized(instances) {
+      if(null != instance) {
+        instances.remove(instance.getVersion());
+      }
     }
   }
 

@@ -48,7 +48,6 @@ import android.widget.FrameLayout;
 import com.fineswap.android.utils.FsGraphics;
 import com.fineswap.android.utils.FsMetaVersion;
 import com.fineswap.android.utils.FsSystem;
-import com.fineswap.android.utils.FsVersion;
 import com.fineswap.android.utils.FsView;
 import java.util.ArrayList;
 
@@ -271,7 +270,7 @@ public class FsIntroOverlay
    * @return This instance's version
    * @since 1.0
    */
-  public FsVersion getVersion() {
+  public FsMetaVersion getVersion() {
     return version;
   }
 
@@ -734,12 +733,20 @@ public class FsIntroOverlay
    * @since 1.0
    */
   public void destroy() {
+    destroyInternal(true);
+  }
+
+  View findViewById(int resourceId) {
+    return activityContentView.findViewById(resourceId);
+  }
+
+  void destroyInternal(boolean updateFactory) {
     // Dismiss the dialog.
     dialog.dismiss();
 
     // Cycle through all slides and free resources retained by them.
     for(FsSlideResource slideResource : slides) {
-      destroyInternal(slideResource);
+      destroySlideInternal(slideResource);
     }
 
     // Empty the dialog's tint view from all resources.
@@ -749,13 +756,14 @@ public class FsIntroOverlay
     currentSlide = null;
     slides.clear();
     holes.clear();
+
+    // Update the Factory concerning this instance.
+    if(updateFactory) {
+      FsIntroFactory.destroyInstance(this);
+    }
   }
 
-  View findViewById(int resourceId) {
-    return activityContentView.findViewById(resourceId);
-  }
-
-  private void destroyInternal(FsSlideResource slideResource) {
+  private void destroySlideInternal(FsSlideResource slideResource) {
     // Hide the current slide and remove any bound listeners.
     if(null != slideResource) {
       // Unbind click listeners from this slide.
