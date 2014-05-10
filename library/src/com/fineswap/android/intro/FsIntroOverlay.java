@@ -238,10 +238,6 @@ public class FsIntroOverlay
 
     // Add it to the dialog's content views.
     dialog.addContentView(dialogContentView, FRAMELAYOUT_MATCH_PARENT);
-
-    // This will construct the DecorView.
-    dialog.show();
-    dialog.hide();
   }
 
   @Override
@@ -431,18 +427,18 @@ public class FsIntroOverlay
       // Before showing the slide, make sure that either the Intro instance is
       // new, or the slide is new, or one ring at least in the slide is new.
       isNewIntro = db.isNewIntro(this);
-      Log.d(LOG_TAG,"Instance: " + this);
+      Log.d(LOG_TAG, "Instance: " + this);
       boolean shouldShowSlide = isNewIntro || db.isNewSlide(slideResource);
-      Log.d(LOG_TAG,"  Slide: " + slideResource);
+      Log.d(LOG_TAG, "  Slide: " + slideResource);
       if(!shouldShowSlide) {
         // Check and find if any rings in this slide are new.
         for(FsRingResource ringResource : slideResource.rings) {
           if(db.isNewRing(slideResource, ringResource)) {
-            Log.d(LOG_TAG,"    Ring '" + ringResource + "' was not viewed yet!");
+            Log.d(LOG_TAG, "    Ring '" + ringResource + "' was not viewed yet!");
             shouldShowSlide = true;
             break;
           }
-          Log.d(LOG_TAG,"    Ring '" + ringResource + "' was viewed.");
+          Log.d(LOG_TAG, "    Ring '" + ringResource + "' was viewed.");
         }
 
         // If there's no need to show the slide, just return abruptly.
@@ -470,7 +466,7 @@ public class FsIntroOverlay
     canvas.drawRect(new Rect(0, 0, activityContentView.getMeasuredWidth(), activityContentView.getMeasuredHeight()), painter);
 
     // Start by assuming that all rings are hidden.
-    boolean allRingsHidden = true;
+    boolean allRingsHidden = 0 < slideResource.rings.size();
 
     // Cycle through the slide's rings to create "holes" in the canvas.
     for(FsRingResource ringResource : slideResource.rings) {
