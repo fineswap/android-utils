@@ -397,6 +397,18 @@ public class FsIntroOverlay
   }
 
   /**
+   * Show the slide at the specified position (forced).
+   *
+   * @param slidePos Position of the slide to show
+   * @param doNotCheckDb Whether to check the database or not (checks by default)
+   * @return Return true if the slide is shown, false otherwise
+   * @since 1.0
+   */
+  public boolean showSlide(int slidePos, boolean doNotCheckDb) {
+    return showSlide(slides.get(slidePos), doNotCheckDb);
+  }
+
+  /**
    * Show the specified, previously-attached slide.
    *
    * @param slideResource Slide to show, must be previously attached
@@ -404,6 +416,18 @@ public class FsIntroOverlay
    * @since 1.0
    */
   public synchronized boolean showSlide(final FsSlideResource slideResource) {
+    return showSlide(slideResource, false);
+  }
+
+  /**
+   * Show the specified, previously-attached slide.
+   *
+   * @param slideResource Slide to show, must be previously attached
+   * @param doNotCheckDb Whether to check the database or not (checks by default)
+   * @return Return true if the slide is shown, false otherwise
+   * @since 1.0
+   */
+  public synchronized boolean showSlide(final FsSlideResource slideResource, boolean doNotCheckDb) {
     // Make sure this slide is attached.
     if(null == slideResource || !slides.contains(slideResource)) {
       return false;
@@ -421,9 +445,11 @@ public class FsIntroOverlay
       return false;
     }
 
+    // By default, the database will be checked.
+    boolean isNewIntro = doNotCheckDb;
+
     // When using a persistent database, check whether to show the slide or not.
-    boolean isNewIntro = null != db;
-    if(isNewIntro) {
+    if(!isNewIntro && null != db) {
       // Before showing the slide, make sure that either the Intro instance is
       // new, or the slide is new, or one ring at least in the slide is new.
       isNewIntro = db.isNewIntro(this);
@@ -637,7 +663,7 @@ public class FsIntroOverlay
     dialog.show();
 
     // Register this instance in preferences.
-    if(null != db) {
+    if(!doNotCheckDb && null != db) {
       Log.d(LOG_TAG,
         "Registered slide."
       );
