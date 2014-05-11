@@ -163,13 +163,6 @@ public class FsIntroOverlay
   private final ViewGroup activityContentView;
 
   /**
-   * Height of the status bar in this Activity.
-   *
-   * @since 1.0
-   */
-  private final int statusBarHeight;
-
-  /**
    * Current slide instance shown.
    *
    * @since 1.0
@@ -195,12 +188,6 @@ public class FsIntroOverlay
     // Get activity's root content view.
     activityContentView = FsView.getRootContentView(activityVersion.data);
     if(null == activityContentView) {
-      throw EXCEPTION_CONTENT_VIEW_NULL_OR_EMPTY;
-    }
-
-    // Try to detect the status bar height.
-    statusBarHeight = FsGraphics.getStatusBarHeight(activityVersion.data);
-    if(0 > statusBarHeight) {
       throw EXCEPTION_CONTENT_VIEW_NULL_OR_EMPTY;
     }
 
@@ -270,7 +257,7 @@ public class FsIntroOverlay
    * @return This instance's version
    * @since 1.0
    */
-  public FsMetaVersion getVersion() {
+  public FsMetaVersion<Activity> getVersion() {
     return version;
   }
 
@@ -525,6 +512,12 @@ public class FsIntroOverlay
           "  Location: " + coords[0] + "x" + coords[1]
         );
 
+        // Try to detect the status bar height.
+        int statusBarHeight = FsGraphics.getStatusBarHeight(getVersion().data);
+        if(0 > statusBarHeight) {
+          throw EXCEPTION_CONTENT_VIEW_NULL_OR_EMPTY;
+        }
+
         // If the view's coordinates and dimension are valid, continue.
         if(0 < width && 0 < height && 0 <= coords[0] && 0 <= coords[1]) {
           FsRingResource.LookAndFeel laf = ringResource.ring.data;
@@ -609,7 +602,7 @@ public class FsIntroOverlay
           Log.d(LOG_TAG,
             "  View in slide is now visible."
           );
-          if(isNewRing && null != db) {
+          if(!doNotCheckDb && isNewRing && null != db) {
             db.registerRing(slideResource, ringResource);
             Log.d(LOG_TAG,
               "    Registered view."
