@@ -41,10 +41,32 @@ public interface FsLayout {
    *
    * @since 1.0
    */
+  public final static ViewGroup.LayoutParams VIEWGROUP_WRAP_CONTENT =
+    new ViewGroup.LayoutParams(
+      ViewGroup.LayoutParams.WRAP_CONTENT,
+      ViewGroup.LayoutParams.WRAP_CONTENT
+    );
+
+  /**
+   * Reusable, global layout parameters for ViewGroup instances.
+   *
+   * @since 1.0
+   */
   public final static ViewGroup.LayoutParams VIEWGROUP_MATCH_PARENT =
     new ViewGroup.LayoutParams(
       ViewGroup.LayoutParams.MATCH_PARENT,
       ViewGroup.LayoutParams.MATCH_PARENT
+    );
+
+  /**
+   * Reusable, global layout parameters for FrameLayout instances.
+   *
+   * @since 1.0
+   */
+  public final static FrameLayout.LayoutParams FRAMELAYOUT_WRAP_CONTENT =
+    new FrameLayout.LayoutParams(
+      FrameLayout.LayoutParams.WRAP_CONTENT,
+      FrameLayout.LayoutParams.WRAP_CONTENT
     );
 
   /**
