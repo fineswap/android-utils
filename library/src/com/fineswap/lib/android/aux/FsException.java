@@ -1,5 +1,5 @@
 /**
- * Graphics Auxiliary Interface - Part of Fineswap Android Utilities.
+ * Exception Auxiliary Interface - Part of Fineswap Android Utilities.
  * Copyright (C) 2014 Fineswap Blog & App. All rights reserved.
  * http://fineswap.com/
  *
@@ -25,23 +25,44 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package com.fineswap.android.aux;
-
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
+package com.fineswap.lib.android.aux;
 
 /**
  * @author Noor Dawod
  * @since 1.0
  */
-public interface FsGraphics {
+public interface FsException {
 
   /**
-   * Mode applied to a Paint instance to enable it to clear a canvas's area.
+   * Handy exception to throw when a parameter's value is either null or empty.
    *
    * @since 1.0
    */
-  public final static PorterDuffXfermode PORTER_DUFF_CLEAR =
-    new PorterDuffXfermode(PorterDuff.Mode.CLEAR);
+  public final static RuntimeException EXCEPTION_NULL_VALUE =
+    new IllegalStateException("The value cannot be null.");
+
+  /**
+   * Handy exception to throw when a parameter's value is either null or empty.
+   *
+   * @since 1.0
+   */
+  public final static RuntimeException EXCEPTION_NULL_OR_EMPTY =
+    new IllegalStateException("The value is either null or empty.");
+
+  /**
+   * Handy exception to throw when a parameter's value is either null or invalid.
+   *
+   * @since 1.0
+   */
+  public final static RuntimeException EXCEPTION_NULL_OR_INVALID =
+    new IllegalStateException("The value is either null or invalid.");
+
+  /**
+   * Handy exception to throw when a content view is either null or undefined.
+   *
+   * @since 1.0
+   */
+  public final static RuntimeException EXCEPTION_CONTENT_VIEW_NULL_OR_EMPTY =
+    new IllegalStateException("Content view is either null or not defined.");
 
 }

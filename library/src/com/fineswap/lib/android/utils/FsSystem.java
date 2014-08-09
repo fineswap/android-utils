@@ -25,7 +25,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package com.fineswap.android.utils;
+package com.fineswap.lib.android.utils;
 
 import android.content.Context;
 import java.io.BufferedInputStream;
@@ -50,7 +50,7 @@ import java.security.NoSuchAlgorithmException;
  * @author Noor Dawod
  * @since 1.0
  */
-public class FsSystem implements com.fineswap.android.aux.FsSystem {
+public class FsSystem implements com.fineswap.lib.android.aux.FsSystem {
 
   /**
    * Compute the SHA-1 digest hash for the specified

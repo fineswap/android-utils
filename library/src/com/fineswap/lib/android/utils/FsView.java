@@ -25,7 +25,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package com.fineswap.android.utils;
+package com.fineswap.lib.android.utils;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;

@@ -25,11 +25,11 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package com.fineswap.android.intro;
+package com.fineswap.lib.android.intro;
 
 import android.app.Activity;
 import android.graphics.Paint;
-import com.fineswap.android.utils.FsMetaVersion;
+import com.fineswap.lib.android.utils.FsMetaVersion;
 import java.util.HashMap;
 import java.util.Set;
 

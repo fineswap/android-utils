@@ -25,14 +25,14 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package com.fineswap.android.intro;
+package com.fineswap.lib.android.intro;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.fineswap.android.utils.FsMetaVersion;
-import com.fineswap.android.utils.FsVersion;
-import com.fineswap.android.utils.FsView;
+import com.fineswap.lib.android.utils.FsMetaVersion;
+import com.fineswap.lib.android.utils.FsVersion;
+import com.fineswap.lib.android.utils.FsView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
@@ -47,7 +47,7 @@ import java.util.Set;
  * @author Noor Dawod
  * @since 1.0
  */
-public class FsSlideResource implements com.fineswap.android.aux.FsLayout {
+public class FsSlideResource implements com.fineswap.lib.android.aux.FsLayout {
 
   /**
    * Interface definition for callbacks to be invoked when a slide is

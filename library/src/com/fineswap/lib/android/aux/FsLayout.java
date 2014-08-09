@@ -25,7 +25,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package com.fineswap.android.aux;
+package com.fineswap.lib.android.aux;
 
 import android.view.ViewGroup;
 import android.widget.FrameLayout;

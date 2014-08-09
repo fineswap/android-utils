@@ -25,10 +25,10 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package com.fineswap.android.intro;
+package com.fineswap.lib.android.intro;
 
-import com.fineswap.android.utils.FsMetaVersion;
-import com.fineswap.android.utils.FsVersion;
+import com.fineswap.lib.android.utils.FsMetaVersion;
+import com.fineswap.lib.android.utils.FsVersion;
 
 /**
  * Defines a portion on the Activity's content view (called a Ring) with
@@ -37,7 +37,7 @@ import com.fineswap.android.utils.FsVersion;
  * @author Noor Dawod
  * @since 1.0
  */
-public class FsRingResource implements com.fineswap.android.aux.FsException {
+public class FsRingResource implements com.fineswap.lib.android.aux.FsException {
 
   /**
    * Define a ring's look-and-feel when it is being painted.

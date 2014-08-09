@@ -25,7 +25,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package com.fineswap.android.utils;
+package com.fineswap.lib.android.utils;
 
 /**
  * A helpful versioning class to define arbitrary objects and assign a version
@@ -36,8 +36,8 @@ package com.fineswap.android.utils;
  */
 public class FsVersion
   implements
-    com.fineswap.android.aux.FsSystem,
-    com.fineswap.android.aux.FsException {
+    com.fineswap.lib.android.aux.FsSystem, 
+    com.fineswap.lib.android.aux.FsException {
 
   private final static NumberFormatException EXCEPTION_NUMBER_ERROR =
     new NumberFormatException();

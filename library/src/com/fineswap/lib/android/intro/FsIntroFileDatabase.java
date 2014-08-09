@@ -25,10 +25,10 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package com.fineswap.android.intro;
+package com.fineswap.lib.android.intro;
 
-import com.fineswap.android.utils.FsSystem;
-import com.fineswap.android.utils.FsVersion;
+import com.fineswap.lib.android.utils.FsSystem;
+import com.fineswap.lib.android.utils.FsVersion;
 import java.io.File;
 
 /**
@@ -39,7 +39,7 @@ import java.io.File;
  */
 public class FsIntroFileDatabase
   implements
-    com.fineswap.android.aux.FsException,
+    com.fineswap.lib.android.aux.FsException,
     FsIntroFactory.PersistentDatabase {
 
   /**

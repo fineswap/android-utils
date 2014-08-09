@@ -25,7 +25,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package com.fineswap.android.widgets;
+package com.fineswap.lib.android.widgets;
 
 import android.content.Context;
 import android.util.AttributeSet;

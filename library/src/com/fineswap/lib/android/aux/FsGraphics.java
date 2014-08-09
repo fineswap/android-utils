@@ -1,5 +1,5 @@
 /**
- * System-related Auxiliary Interface - Part of Fineswap Android Utilities.
+ * Graphics Auxiliary Interface - Part of Fineswap Android Utilities.
  * Copyright (C) 2014 Fineswap Blog & App. All rights reserved.
  * http://fineswap.com/
  *
@@ -25,28 +25,23 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package com.fineswap.android.aux;
+package com.fineswap.lib.android.aux;
 
-import java.util.regex.Pattern;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 
 /**
  * @author Noor Dawod
  * @since 1.0
  */
-public interface FsSystem {
+public interface FsGraphics {
 
   /**
-   * A buffer size suitable for working with file operations.
+   * Mode applied to a Paint instance to enable it to clear a canvas's area.
    *
    * @since 1.0
    */
-  public final static int FILEOP_BUFFER_SIZE = 2048;
-
-  /**
-   * A regular expression pattern to match a dot.
-   *
-   * @since 1.0
-   */
-  public final static Pattern PATTERN_DOT = Pattern.compile("\\.");
+  public final static PorterDuffXfermode PORTER_DUFF_CLEAR =
+    new PorterDuffXfermode(PorterDuff.Mode.CLEAR);
 
 }

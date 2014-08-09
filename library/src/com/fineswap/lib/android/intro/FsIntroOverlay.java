@@ -25,7 +25,7 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-package com.fineswap.android.intro;
+package com.fineswap.lib.android.intro;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -45,10 +45,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.FrameLayout;
-import com.fineswap.android.utils.FsGraphics;
-import com.fineswap.android.utils.FsMetaVersion;
-import com.fineswap.android.utils.FsSystem;
-import com.fineswap.android.utils.FsView;
+import com.fineswap.lib.android.utils.FsGraphics;
+import com.fineswap.lib.android.utils.FsMetaVersion;
+import com.fineswap.lib.android.utils.FsSystem;
+import com.fineswap.lib.android.utils.FsView;
 import java.util.ArrayList;
 
 /**
@@ -66,9 +66,9 @@ import java.util.ArrayList;
  */
 public class FsIntroOverlay
   implements
-    com.fineswap.android.aux.FsLayout,
-    com.fineswap.android.aux.FsGraphics,
-    com.fineswap.android.aux.FsException {
+    com.fineswap.lib.android.aux.FsLayout,
+    com.fineswap.lib.android.aux.FsGraphics,
+    com.fineswap.lib.android.aux.FsException {
 
   private final static String LOG_TAG = "FsIntroOverlay";
 
